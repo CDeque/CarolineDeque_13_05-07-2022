@@ -1,9 +1,8 @@
 //------ Imports ------//
 import styled from "styled-components";
-import ChatIcon from "../../assets/icon-chat.png";
-import MoneyIcon from "../../assets/icon-money.png";
-import SecurityIcon from "../../assets/icon-security.png";
+import { features } from "../../data/data";
 import BankTree from "../../assets/bank-tree.jpeg";
+import FeaturesCard from "../../components/FeaturesCard";
 
 export default function Home() {
     return (
@@ -21,49 +20,15 @@ export default function Home() {
             </HeroDiv>
             <FeaturesSection className="features">
                 <h2 className="sr-only">Features</h2>
-                <div className="feature-item">
-                    <FeatureIcon
-                        src={ChatIcon}
-                        alt="Chat Icon"
-                        className="feature-icon"
+                {features.map((feature, index) => (
+                    <FeaturesCard
+                        key={index}
+                        icon={feature.icon}
+                        alt={feature.altContent}
+                        title={feature.title}
+                        text={feature.text}
                     />
-                    <FeatureItemTitle className="feature-item-title">
-                        You are our #1 priority
-                    </FeatureItemTitle>
-                    <p>
-                        Need to talk to a representative? You can get in touch
-                        through our 24/7 chat or through a phone call in less
-                        than 5 minutes.
-                    </p>
-                </div>
-                <div className="feature-item">
-                    <FeatureIcon
-                        src={MoneyIcon}
-                        alt="Money Icon"
-                        className="feature-icon"
-                    />
-                    <h3 className="feature-item-title">
-                        More savings means higher rates
-                    </h3>
-                    <p>
-                        The more you save with us, the higher your interest rate
-                        will be!
-                    </p>
-                </div>
-                <FeatureItem className="feature-item">
-                    <FeatureIcon
-                        src={SecurityIcon}
-                        alt="Security Icon"
-                        className="feature-icon"
-                    />
-                    <h3 className="feature-item-title">
-                        Security you can trust
-                    </h3>
-                    <p>
-                        We use top of the line encryption to make sure your data
-                        and money is always safe.
-                    </p>
-                </FeatureItem>
+                ))}
             </FeaturesSection>
         </Main>
     );
@@ -132,22 +97,4 @@ const FeaturesSection = styled.section`
     @media (min-width: 920px) {
         flex-direction: row;
     }
-`;
-const FeatureIcon = styled.img`
-    width: 100px;
-    border: 10px solid #00bc77;
-    border-radius: 50%;
-    padding: 1rem;
-`;
-
-const FeatureItem = styled.div`
-    flex: 1;
-    padding: 2.5rem;
-`;
-
-const FeatureItemTitle = styled.h3`
-    color: #222;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
 `;
