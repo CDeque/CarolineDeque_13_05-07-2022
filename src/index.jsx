@@ -16,8 +16,8 @@ root.render(
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/login" element={<SignIn />} />
+                <Route path="/profile" element={<User />} />
             </Routes>
             <Footer />
         </Router>
