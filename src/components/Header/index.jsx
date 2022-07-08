@@ -21,7 +21,7 @@ export default function Header() {
                 <H1 className="sr-only">Argent Bank</H1>
             </StyledLink>
             <div>
-                <SignInLink to={"#"} className="main-nav-item">
+                <SignInLink to={"/login"} className="main-nav-item">
                     <i className="fa fa-user-circle"></i>
                     Sign In
                 </SignInLink>
