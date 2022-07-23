@@ -1,21 +1,57 @@
 //------ Imports------//
-
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { loadUser } from "../../redux/feature/authSlice";
+
+import { loginUser } from "../../services";
 
 export default function SignIn() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const auth = useSelector((state) => state.auth);
+    console.log(auth);
+
+    const [user, setUser] = useState({
+        email: "",
+        password: "",
+    });
+    useEffect(() => {
+        if (auth._id) {
+            navigate("/profile");
+            dispatch(loadUser(null));
+        }
+    }, [auth._id, dispatch, navigate]);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(loginUser(user));
+    };
     return (
         <Main className="bg-dark">
             <SignInSection className="sign-in-content">
                 <SignInIcon className="fa fa-user-circle sign-in-icon"></SignInIcon>
                 <h1>Sign in</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <InputWrapper className="input-wrapper">
                         <label htmlFor="username">Username</label>
-                        <input type="text" id="username" />
+                        <input
+                            type="text"
+                            id="username"
+                            onChange={(e) =>
+                                setUser({ ...user, email: e.target.value })
+                            }
+                        />
                     </InputWrapper>
                     <InputWrapper className="input-wrapper">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" />
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) =>
+                                setUser({ ...user, password: e.target.value })
+                            }
+                        />
                     </InputWrapper>
                     <InputRemember className="input-remember">
                         <input type="checkbox" id="remember-me" />
