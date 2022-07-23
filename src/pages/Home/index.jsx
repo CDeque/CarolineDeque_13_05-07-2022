@@ -49,11 +49,11 @@ const HeroDiv = styled.div`
     background-repeat: no-repeat;
     height: 300px;
     position: relative;
-    
+
     @media (min-width: 920px) {
-          height: 400px;
-          background-position: 0% 33%;
-        
+        height: 400px;
+        background-position: 0% 33%;
+    }
 `;
 
 const HeroSection = styled.section`
