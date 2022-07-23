@@ -1,7 +1,10 @@
 //------imports------
+
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../assets/argentBankLogo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../../redux/feature/authSlice";
 
 /**
  *
@@ -9,6 +12,8 @@ import Logo from "../../assets/argentBankLogo.png";
  */
 
 export default function Header() {
+    const auth = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
     return (
         <MainNav className="main-nav">
             <StyledLink to={"/"} className="main-nav-logo">
@@ -20,12 +25,35 @@ export default function Header() {
 
                 <H1 className="sr-only">Argent Bank</H1>
             </StyledLink>
-            <div>
-                <SignInLink to={"/login"} className="main-nav-item">
-                    <i className="fa fa-user-circle"></i>
-                    Sign In
-                </SignInLink>
-            </div>
+
+            {!auth._id ? (
+                <div>
+                    <LogLink to={"/login"} className="main-nav-item">
+                        <i className="fa fa-user-circle"></i>
+                        Sign In
+                    </LogLink>
+                </div>
+            ) : (
+                <div>
+                    <LogLink to={"/profile"} className="main-nav-item">
+                        <i className="fa fa-user-circle"></i>
+                        User
+                    </LogLink>
+                    <LogLink
+                        onClick={() => {
+                            dispatch(logOut(null));
+                        }}
+                        to={"/"}
+                        className="main-nav-item"
+                    >
+                        <i
+                            className="fa fa-sign-out"
+                            style={{ paddingLeft: "5px" }}
+                        ></i>
+                        Sign Out
+                    </LogLink>
+                </div>
+            )}
         </MainNav>
     );
 }
@@ -65,7 +93,7 @@ const H1 = styled.h1`
     white-space: nowrap !important; /* 3 */
 `;
 
-const SignInLink = styled(NavLink)`
+const LogLink = styled(NavLink)`
     text-decoration: none;
     margin-right: 0.5rem;
     font-weight: bold;
