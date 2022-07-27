@@ -13,6 +13,7 @@ import { logOut } from "../../redux/feature/authSlice";
 
 export default function Header() {
     const auth = useSelector((state) => state.auth);
+    const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
     return (
         <MainNav className="main-nav">
@@ -37,7 +38,7 @@ export default function Header() {
                 <div>
                     <LogLink to={"/profile"} className="main-nav-item">
                         <i className="fa fa-user-circle"></i>
-                        User
+                        {user.firstName}
                     </LogLink>
                     <LogLink
                         onClick={() => {
