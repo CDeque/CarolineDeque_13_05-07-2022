@@ -11,7 +11,6 @@ export default function SignIn() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
-    console.log(auth);
 
     const [user, setUser] = useState({
         email: "",
