@@ -1,22 +1,53 @@
 //------ Imports ------//
 
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BalanceCard from "../../components/BalanceCard";
+import UserForm from "../../components/userForm";
 import { userAccountData } from "../../data/data";
+import { userProfile } from "../../services";
 
 /**
  *
  * @returns profile page
+ * @typedef {boolean} if !auth can't access profile
  */
 export default function User() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const auth = useSelector((state) => state.auth);
+    const user = useSelector((state) => state.user);
+
+    useEffect(() => {
+        if (!auth._id) {
+            navigate("/login");
+        } else {
+            dispatch(userProfile());
+        }
+    }, [auth._id, navigate, dispatch]);
+
+    console.log(auth, user);
+    const [showEditForm, setShowEditForm] = useState(false);
+    const showForm = () => {
+        setShowEditForm(!showEditForm);
+    };
     return (
         <Main className="main bg-dark">
             <Header className="header">
                 <h1>
                     Welcome back <br />
-                    Tony Jarvis
+                    {user.firstName + " " + user.lastName}
                 </h1>
-                <EditButton className="edit-button">Edit Name</EditButton>
+                {showEditForm ? (
+                    <UserForm showForm={showForm} />
+                ) : (
+                    <EditButton className="edit-button" onClick={showForm}>
+                        Edit Name
+                    </EditButton>
+                )}
             </Header>
             <H2 className="sr-only">Accounts</H2>
             {userAccountData.map((data, index) => (

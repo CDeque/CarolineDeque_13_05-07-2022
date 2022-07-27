@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jwt_decode from "jwt-decode";
 import { loginUser } from "../../services";
+
 /**
  * @params to add token to the localStorage to get back a key ("token")
  * @params {string} token, email, _id
