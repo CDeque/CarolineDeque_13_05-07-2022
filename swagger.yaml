@@ -1,0 +1,118 @@
+swagger: '2.0'
+info:
+  title: Argent Bank documentation
+  description: Specify possible API endpoints needed for phase two of Argent Bank project (get transactions)
+  version: "1.0.0"
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths: 
+  /user/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - user transactions module
+      summary:  Get transactions
+      description: API for transactions
+      parameters:
+        - in: header
+          name: Authorization
+          description: attach Bearer JWT token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: "transactions retrieved succesfully"
+          schema:
+           $ref: "#/definitions/transactionsResponse"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+ ' /user/transaction/id':
+    put:
+    security:
+      - Bearer: []
+    tags:
+      - user transaction module
+    summary: edit user's transaction
+    description: API for editing user transaction
+    parameters:
+      - in: header
+        name: Authorization
+        description: Attach Bearer JWT token
+        required: true
+      - in: body
+        name: body
+        description: edit user transaction for item category and notes
+        required: true
+        schema:
+          $ref: "#/definitions/transaction"
+    produces:
+      - application/json
+    reponses:
+      "200":
+      description: "transaction edited succesfully"
+      schema: 
+        $ref: "#/definitions/transactionResponse"
+      "400":
+        description: Invalid Fields
+      "500":
+        description: Internal Server Error
+  securityDefinitions:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+  definitions:
+   Transaction:
+    properties:
+      category:
+        type: string
+        description: transaction category
+      notes:
+        type: string
+        description: transaction notes
+  Login:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: string
+          email:
+            type: string
+  LoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  UserProfile:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string      
+    
+        
+    
+        
