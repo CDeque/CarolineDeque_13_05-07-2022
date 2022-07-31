@@ -1,8 +1,14 @@
 //------ Imports------//
 import styled from "styled-components";
 import { PropTypes } from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 export default function BalanceCard(data) {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/transactions");
+    };
     return (
         <AccountSection className="account">
             <AccountWrapper className="account-content-wrapper">
@@ -17,7 +23,10 @@ export default function BalanceCard(data) {
                 </AccountDescription>
             </AccountWrapper>
             <AccountWrapper className="account-content-wrapper cta">
-                <TransactionButton className="transaction-button">
+                <TransactionButton
+                    className="transaction-button"
+                    onClick={handleClick}
+                >
                     view transactions
                 </TransactionButton>
             </AccountWrapper>
@@ -43,9 +52,10 @@ const AccountSection = styled.section`
     text-align: left;
     margin-bottom: 2rem;
     @media (min-width: 720px) {
-      .account {
-        flex-direction: row;
-      }
+        .account {
+            flex-direction: row;
+        }
+    }
 `;
 
 const AccountAmount = styled.p`

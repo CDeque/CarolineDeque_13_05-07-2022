@@ -14,7 +14,7 @@ html {
     }
     
     body {
-      margin: 0;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       min-height: 100vh;

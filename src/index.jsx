@@ -10,6 +10,7 @@ import SignIn from "./pages/SignIn";
 import User from "./pages/User";
 import GlobalStyle from "./utils/Style/GlobalStyle";
 import { loadUser } from "./redux/feature/authSlice";
+import Transactions from "./pages/Transactions";
 store.dispatch(loadUser(null));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -23,6 +24,7 @@ root.render(
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<SignIn />} />
                     <Route path="/profile" element={<User />} />
+                    <Route path="/transactions" element={<Transactions />} />
                 </Routes>
                 <Footer />
             </Router>

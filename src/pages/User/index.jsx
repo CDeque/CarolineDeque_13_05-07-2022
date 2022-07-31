@@ -1,5 +1,4 @@
 //------ Imports ------//
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +13,7 @@ import { userProfile } from "../../services";
  * @returns profile page
  * @typedef {boolean} if !auth can't access profile
  */
+
 export default function User() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
