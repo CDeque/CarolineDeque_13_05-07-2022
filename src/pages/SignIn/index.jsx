@@ -6,7 +6,10 @@ import styled from "styled-components";
 import { loadUser } from "../../redux/feature/authSlice";
 
 import { loginUser } from "../../services";
-
+/**
+ *
+ * @returns login's page
+ */
 export default function SignIn() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -55,11 +58,10 @@ export default function SignIn() {
                     <InputRemember className="input-remember">
                         <input type="checkbox" id="remember-me" />
                         <label htmlFor="remember-me">Remember me</label>
-
-                        <SignInButton className="sign-in-button">
-                            Sign In
-                        </SignInButton>
                     </InputRemember>
+                    <SignInButton className="sign-in-button">
+                        Sign In
+                    </SignInButton>
                 </form>
             </SignInSection>
         </Main>

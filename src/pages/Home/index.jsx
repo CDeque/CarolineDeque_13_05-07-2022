@@ -4,6 +4,10 @@ import { features } from "../../data/data";
 import BankTree from "../../assets/bank-tree.jpeg";
 import FeaturesCard from "../../components/FeaturesCard";
 
+/**
+ *
+ * @returns  HomePage
+ */
 export default function Home() {
     return (
         <Main>

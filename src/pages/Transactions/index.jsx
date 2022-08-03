@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TransactionCard from "../../components/TransactionCard";
 
+/**
+ *
+ * @returns Transaction Page
+ */
 export default function Transactions() {
     const navigate = useNavigate();
 

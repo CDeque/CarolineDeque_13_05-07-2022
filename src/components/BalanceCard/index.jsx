@@ -3,6 +3,11 @@ import styled from "styled-components";
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
 
+/**
+ *
+ * @param {*} data
+ * @returns Balance Card component
+ */
 export default function BalanceCard(data) {
     const navigate = useNavigate();
 
@@ -33,11 +38,19 @@ export default function BalanceCard(data) {
         </AccountSection>
     );
 }
+
+/**
+ * @returns PropTypes
+ */
 BalanceCard.propTypes = {
     title: PropTypes.string.isRequired,
     amount: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
 };
+
+/**
+ * Balance Card Style
+ */
 const AccountSection = styled.section`
     display: flex;
     justify-content: space-between;
