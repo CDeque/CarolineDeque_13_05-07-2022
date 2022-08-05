@@ -1,118 +1,124 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  title: Argent Bank documentation
-  description: Specify possible API endpoints needed for phase two of Argent Bank project (get transactions)
-  version: "1.0.0"
-  termsOfService: 'http://swagger.io/terms/'
-host: localhost:3001
+    description: >-
+        Specify possible API endpoints needed for phase two of Argent Bank project
+        (get transactions
+    version: 1.0.0
+    title: Argent Bank Documentation
+    termsOfService: http://swagger.io/terms/
+host: localhost:3000
 basePath: /api/v1
+tags:
+    - name: User Transactions Module
+      description: accounts transactions operations
 schemes:
-  - http
-paths: 
-  /user/transactions:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - user transactions module
-      summary:  Get transactions
-      description: API for transactions
-      parameters:
-        - in: header
-          name: Authorization
-          description: attach Bearer JWT token
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        "200":
-          description: "transactions retrieved succesfully"
-          schema:
-           $ref: "#/definitions/transactionsResponse"
-        "400":
-          description: Invalid Fields
-        "500":
-          description: Internal Server Error
- ' /user/transaction/id':
-    put:
-    security:
-      - Bearer: []
-    tags:
-      - user transaction module
-    summary: edit user's transaction
-    description: API for editing user transaction
-    parameters:
-      - in: header
-        name: Authorization
-        description: Attach Bearer JWT token
-        required: true
-      - in: body
-        name: body
-        description: edit user transaction for item category and notes
-        required: true
-        schema:
-          $ref: "#/definitions/transaction"
-    produces:
-      - application/json
-    reponses:
-      "200":
-      description: "transaction edited succesfully"
-      schema: 
-        $ref: "#/definitions/transactionResponse"
-      "400":
-        description: Invalid Fields
-      "500":
-        description: Internal Server Error
-  securityDefinitions:
+    - http
+paths:
+    /user/transactions/date:
+        get:
+            security:
+                - Bearer: []
+            tags:
+                - User Transactions Module
+            summary: Get User Transactions
+            description: "API for Transactions sort by date, to allow user to get them monthly "
+            parameters:
+                - in: header
+                  name: Authorization
+                  description: attach Bearer JWT token
+                  required: true
+                  type: string
+            produces:
+                - application/json
+            responses:
+                "200":
+                    description: transactions retrieved successfully
+                    schema:
+                        $ref: "#/definitions/Transactions"
+                "400":
+                    description: Invalid Fields
+                "500":
+                    description: Internal Server Error
+    /user/transaction/id:
+        put:
+            security:
+                - Bearer: []
+            tags:
+                - User Transaction Module
+            summary: Edit user transaction
+            description: API for editing user transactions
+            produces:
+                - application/json
+            parameters:
+                - in: header
+                  name: Authorization
+                  description: Attach Bearer JWT token
+                  required: true
+                  type: string
+                - in: body
+                  name: body
+                  description: Edit user transaction category and notes item
+                  required: true
+                  schema:
+                      $ref: "#/definitions/EditTransaction"
+            responses:
+                "200":
+                    description: transaction edited successfully
+                "400":
+                    description: Invalid Fields
+                "500":
+                    description: Invalid Server Error
+securityDefinitions:
     Bearer:
-      type: apiKey
-      name: Authorization
-      in: header
-  definitions:
-   Transaction:
-    properties:
-      category:
-        type: string
-        description: transaction category
-      notes:
-        type: string
-        description: transaction notes
-  Login:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-  ApiResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
+        type: apiKey
+        name: Authorization
+        in: header
+definitions:
+    Transactions:
         type: object
         properties:
-          id:
-            type: string
-          email:
-            type: string
-  LoginResponse:
-    type: object
-    properties:
-      token:
-        type: string
-  UserProfile:
-    type: object
-    properties:
-      firstName:
-        type: string
-      lastName:
-        type: string      
-    
-        
-    
-        
+            id:
+                type: integer
+                description: transaction id
+            date:
+                type: string
+                description: transaction date
+            description:
+                type: string
+                description: transaction description
+            amount:
+                type: number
+                description: transaction amount
+            balance:
+                type: number
+                description: account balance
+            transaction type:
+                type: string
+                description: transaction type
+    EditTransaction:
+        type: object
+        properties:
+            id:
+                type: number
+                description: transaction id
+            date:
+                type: string
+                description: transaction date
+            description:
+                type: string
+                description: transaction description
+            amount:
+                type: number
+                description: transaction amount
+            balance:
+                type: number
+                description: account balance
+            transaction type:
+                type: string
+                description: transaction type
+            category:
+                type: string
+                description: category type
+            notes:
+                type: string
+                description: transaction notes
