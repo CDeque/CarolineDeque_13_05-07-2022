@@ -10,7 +10,6 @@ import { editUser } from "../../services";
  *
  */
 export default function UserForm(props) {
-    const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const [editUserName, setEditUserName] = useState({
         firstName: "",
