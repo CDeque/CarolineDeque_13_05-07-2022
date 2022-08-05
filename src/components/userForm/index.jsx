@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { editUser } from "../../services";
 
@@ -10,8 +10,8 @@ import { editUser } from "../../services";
  *
  */
 export default function UserForm(props) {
+    const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
-
     const [editUserName, setEditUserName] = useState({
         firstName: "",
         lastName: "",
@@ -19,8 +19,13 @@ export default function UserForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(editUser(editUserName));
-        props.showForm(false);
+
+        if (editUserName.firstName.trim().length !== 0) {
+            dispatch(editUser(editUserName));
+            props.showForm(false);
+        } else {
+            props.showForm(true);
+        }
     };
 
     return (
@@ -36,6 +41,7 @@ export default function UserForm(props) {
                             firstName: e.target.value,
                         })
                     }
+                    required
                 />
                 <label htmlFor="lastName"></label>
                 <EditInput
@@ -47,6 +53,7 @@ export default function UserForm(props) {
                             lastName: e.target.value,
                         })
                     }
+                    required
                 />
             </Form>
             <ButtonContainer className="button_container">
