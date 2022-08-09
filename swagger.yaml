@@ -39,7 +39,7 @@ paths:
                     description: Invalid Fields
                 "500":
                     description: Internal Server Error
-    /user/transactions/:date/transaction/{id}:
+    /user/transactions/{id}:
         get:
             security:
                 - Bearer: []
@@ -87,6 +87,12 @@ paths:
                   description: id of the added transaction
                   required: true
                   type: string
+                - in: body
+                  name: body
+                  description: transaction parameters
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Transaction"
             produces:
                 - application/json
             responses:
